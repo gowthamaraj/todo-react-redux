@@ -1,5 +1,6 @@
 import React from "react";
 import ListItem from './ListItem'
+import {connect} from 'react-redux'
 
 function ListWrapper(props) {
     const del = (key)=>{
@@ -11,10 +12,14 @@ function ListWrapper(props) {
   return (
     <ul className="comp_list_wrapper list-group">
     {props.items.map((item)=>{
-        return (<ListItem item={item} del={del}/>)
+        return (<ListItem key={item.key} item={item} del={del}/>)
     })}
     </ul>
   );
 }
 
-export default ListWrapper;
+const mapStateToProps = (state) => {
+  return {items:state.data}
+}
+
+export default connect(mapStateToProps)(ListWrapper);
