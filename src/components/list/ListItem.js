@@ -1,9 +1,10 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import {useDispatch} from 'react-redux'
 
 function ListItem(props) {
+  let dispatch = useDispatch()
     return (
-        <li className="list-group-item d-flex justify-content-between align-items-center" key={props.item.key} onClick={()=>{props.del(props.item.key)}}>
+        <li className="list-group-item d-flex justify-content-between align-items-center" key={props.item.key} onClick={()=>{dispatch({type:"DELETE", key:props.item.key})}}>
         {props.item.content}
         <span>
           <svg
@@ -23,13 +24,5 @@ function ListItem(props) {
       </li>
     )
 }
-const mapStateToProps = (state) => {
-  return {}
-}
-const mapDispatchToProps = (dispatch) => {
-  return {del:(key)=>{
-    dispatch({type:"DELETE", key:key})
-  }}
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListItem)
+export default ListItem

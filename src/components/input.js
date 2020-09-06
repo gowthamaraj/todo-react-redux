@@ -1,11 +1,12 @@
 import React from "react";
-import {connect} from 'react-redux'
+import {useDispatch} from 'react-redux'
 
- function Input(props) {
+ function Input() {
+   const dispatch = useDispatch()
   const sub = (e)=>{
     e.preventDefault()
     let data ={'key':Math.random(),'content':e.target.inp.value.trim()}
-    props.update(data)
+    dispatch({type:"UPDATE", payload:data})
     e.target.inp.value = ''
   }
   return (
@@ -24,14 +25,4 @@ import {connect} from 'react-redux'
       </form>
   );
 }
-
-const mapStateToProps = (state) => {
-  return {}
-}
-const mapDispatchToProps = (dispatch) => {
-  return {update:(payload)=>{
-    dispatch({type:"UPDATE", payload:payload})
-  }}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Input)
+export default Input
